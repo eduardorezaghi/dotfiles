@@ -1,0 +1,38 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Eduardo Rezaghi
+	email = eduardo.rezaghi@gmail.com
+[core]
+	editor = lvim -c 'set ft=gitcommit' 
+
+[alias]
+	chk = checkout
+	br = branch
+    ca = !git add . && git commit -m
+	ci = commit
+	st = status
+    s = status -s
+	last = log -1 HEAD
+    l = log --pretty=format:'%C(yellow)%h - %C(green)%an%C(reset), %ar: %C(bold red)%s'
+	graph = log --oneline --decorate --graph --all
+	untag = tag --delete
+	pushd = push -u origin HEAD
+	
+	# More aliases (from https://bit.ly/34blt41)
+	co = checkout
+	ds = diff --staged
+	amend = commit --amend -C HEAD
+	undo = clean -f -d
+	undoci = reset HEAD~1
+	unstage = reset HEAD --
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short
+	lg-full = log --name-status --pretty=fuller
+[diff]
+	tool = vimdiff
+[safe]
+	directory = /opt/stable-diffusion-web-ui
