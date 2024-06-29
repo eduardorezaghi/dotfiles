@@ -3,6 +3,8 @@ if [[ $(uname) == "Darwin" ]]; then
     export PGGSSENCMODE="disable"
 fi
 
+export PAGER="nvimpager"
+
 export CRYPTO_CY_PASSWORD="d6G@%a%qNVi4VXXPiPXCT*HxGgBmrLWPhvK"
 export CRYPTO_CY_SECRET="d6G@%a%qNVi4VXXPiPXCT*HxGgBmrLWPhvK"
 

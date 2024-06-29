@@ -60,11 +60,6 @@ if [ -d "/snap/bin" ]; then
     export PATH=$PATH:/snap/bin
 fi
 
-# Pyenv virtualenv command key
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -78,12 +73,11 @@ if [ -d "$HOME/.rbenv" ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 fi
-eval "$(rbenv init -)"
 
 export PATH="$HOME/.local/bin:$PATH"
 
 # MacOS specific settings.
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
     # Homebrew
     eval $(/opt/homebrew/bin/brew shellenv)
 
@@ -91,6 +85,13 @@ if [ "$(uname)" == "Darwin" ]; then
     source /opt/homebrew/opt/asdf/libexec/asdf.sh
 fi
 
+# Pyenv virtualenv command key
+if command -v pyenv &>/dev/null; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 # Options
 setopt autocd              # Automatically change directory when typing a directory name

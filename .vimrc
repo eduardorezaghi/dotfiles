@@ -7,25 +7,24 @@ endif
 
 " Base VIM configuration.
 
-
+let mapleader="\<Space>"
 set nocompatible " Use Vim settings, rather than Vi settings
 set softtabstop=2 " Indent by 2 spaces when hitting tab
 set shiftwidth=4 " Indent by 4 spaces when auto-indenting
 set tabstop=4 " Show existing tab with 4 spaces width
 
 
-set cursorline " Highlight the current line
-"set cursorcolumn Highlight the current column
-highlight CursorLine guibg=lightblue ctermbg=lightgrey
-
+set cursorline " Highlight the current line 
+"set cursorcolumn Highlight the current column   
+     
 set history=1000 " Keep a history of 1000 commands
 set ruler " Show the cursor position all the time
 set relativenumber " Show line numbers relative to the current line
-set mouse=a " Enable mouse support
-set autoindent " Automatically indent new lines
+set mouse=a " Enable mouse support    
+set autoindent " Automatically indent new lines 
 set nobackup " Disable backup files
 set laststatus=2 " Always show the status line
-set wildmenu " Enable enhanced command-line completion
+set wildmenu " Enable enhanced command-line completion 
 
 " Search options
 set incsearch " Incremental search
@@ -37,7 +36,6 @@ syntax on " Enable syntax highlighting
 filetype plugin indent on " Enable filetype-specific plugins and indenting
 
 " Persistent undo
-set undodir=~/.vim/undodir
 set undofile
 
 
@@ -56,7 +54,8 @@ call plug#begin()
 
 
 Plug 'github/copilot.vim'
-
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'preservim/nerdcommenter'
 
 
 " Initialize plugin system
