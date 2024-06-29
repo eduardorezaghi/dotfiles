@@ -5,24 +5,30 @@
 	required = true
 [user]
 	name = Eduardo Rezaghi
-	email = eduardo.rezaghi@gmail.com
-[core]
-	editor = lvim -c 'set ft=gitcommit' 
+	email = eduardo.taliani@skyone.solutions
 
+[diff]
+    tool = lvimdiff
+
+[difftool "lvimdiff"]
+    cmd = lvim -f -d $LOCAL $REMOTE
+
+# [difftool "meld"]
+# 	cmd = meld $LOCAL $REMOTE
 [alias]
 	chk = checkout
 	br = branch
-    ca = !git add . && git commit -m
 	ci = commit
 	st = status
-    s = status -s
 	last = log -1 HEAD
-    l = log --pretty=format:'%C(yellow)%h - %C(green)%an%C(reset), %ar: %C(bold red)%s'
-	graph = log --oneline --decorate --graph --all
+	graph = log --graph --oneline --decorate --date-order --color --boundary @{u}
+
 	untag = tag --delete
 	pushd = push -u origin HEAD
-	
-	# More aliases (from https://bit.ly/34blt41)
+	ll = log --oneline
+	discard = reset --hard
+
+# More aliases (from https://bit.ly/34blt41)
 	co = checkout
 	ds = diff --staged
 	amend = commit --amend -C HEAD
@@ -32,7 +38,13 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short
 	lg-full = log --name-status --pretty=fuller
-[diff]
-	tool = vimdiff
-[safe]
-	directory = /opt/stable-diffusion-web-ui
+
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+
+# [credential]
+# 	helper = manager
+[push]
+	autoSetupRemote = true

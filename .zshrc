@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Functions
 fpath=(~/.zsh_functions $fpath)
 autoload -Uz stable_diffusion
@@ -20,8 +27,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 MEWLINE=$'\n'
 
 # Antigen
-source /usr/share/zsh/share/antigen.zsh
-
+source ~/antigen.zsh
 antigen init ~/.antigenrc
 
 
@@ -49,7 +55,10 @@ alias l='ls -CF'
 alias lgit=lazygit
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
-export PATH=$PATH:/snap/bin
+# Check if /snap/bin exists before adding it to PATH
+if [ -d "/snap/bin" ]; then
+    export PATH=$PATH:/snap/bin
+fi
 
 # Pyenv virtualenv command key
 export PYENV_ROOT="$HOME/.pyenv"
@@ -64,13 +73,29 @@ export NVM_DIR="$HOME/.nvm"
 
 
 
-export PATH="$HOME/.rbenv/bin:$PATH"
+# Check if rbenv is installed
+if [ -d "$HOME/.rbenv" ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
 eval "$(rbenv init -)"
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# MacOS specific settings.
+if [ "$(uname)" == "Darwin" ]; then
+    # Homebrew
+    eval $(/opt/homebrew/bin/brew shellenv)
+
+    # Homebrew ASDF
+    source /opt/homebrew/opt/asdf/libexec/asdf.sh
+fi
 
 
 # Options
 setopt autocd              # Automatically change directory when typing a directory name
 setopt correct             # Suggest corrections for mistyped commands
 setopt extendedglob        # Enable extended globbing patterns
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
