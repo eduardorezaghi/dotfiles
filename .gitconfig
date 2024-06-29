@@ -7,7 +7,7 @@
 	name = Eduardo Rezaghi
 	email = eduardo.rezaghi@gmail.com
 [core]
-	editor = lvim -c 'set ft=gitcommit' 
+	editor = nvim -c 'set ft=gitcommit'
 
 [alias]
 	chk = checkout
