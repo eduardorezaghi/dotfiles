@@ -6,6 +6,7 @@
 [user]
 	name = Eduardo Rezaghi
 	email = eduardo.rezaghi@gmail.com
+
 [core]
 	editor = nvim -c 'set ft=gitcommit'
 
@@ -21,6 +22,8 @@
 	graph = log --oneline --decorate --graph --all
 	untag = tag --delete
 	pushd = push -u origin HEAD
+    ll = log --oneline
+    discard = reset --hard
 	
 	# More aliases (from https://bit.ly/34blt41)
 	co = checkout
@@ -32,7 +35,12 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]\" --decorate --date=short
 	lg-full = log --name-status --pretty=fuller
+
 [diff]
 	tool = vimdiff
+
 [safe]
 	directory = /opt/stable-diffusion-web-ui
+
+[includeIf "gitdir:~/Projetos/Skyone/"]
+    path = .gitconfig-work

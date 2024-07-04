@@ -61,6 +61,18 @@ Plug 'preservim/nerdcommenter'
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
+
+let g:VM_theme = 'iceblue'
+let g:VM_highlight_matches = 'underline'
+let g:VM_maps = {}
+let g:VM_maps["Select All"]        = '<leader>a'
+let g:VM_maps["Visual All"]        = '<leader>a'
+let g:VM_maps["Align"]             = '<leader>A'
+let g:VM_maps["Add Cursor Down"]   = '<C-j>'
+let g:VM_maps["Add Cursor Up"]     = '<C-k>'
+
+
+
 " You can revert the settings after the call like so:
 "   filetype indent off   " Disable file-type-specific indentation
 "   syntax off            " Disable syntax highlighting
