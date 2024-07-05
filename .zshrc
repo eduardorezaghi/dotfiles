@@ -16,6 +16,13 @@ autoload -Uz compinit && compinit
 # AWS CLI.
 complete -C '/usr/local/bin/aws_completer' aws
 
+# Funtoo keychain.
+if [ "$(uname)" = "Linux" ]; then
+    # If keychain is installed, load the keys.
+    eval $(/usr/sbin/keychain --eval --quiet id_ed25519 id_rsa) 2>/dev/null
+fi
+
+
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
