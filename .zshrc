@@ -19,7 +19,7 @@ complete -C '/usr/local/bin/aws_completer' aws
 # Funtoo keychain.
 if [ "$(uname)" = "Linux" ]; then
     # If keychain is installed, load the keys.
-    eval $(/usr/sbin/keychain --eval --quiet id_ed25519 id_rsa) 2>/dev/null
+    (command -v keychain &>/dev/null) && eval $(keychain --eval --quiet id_ed25519 id_rsa) 2>/dev/null
 fi
 
 

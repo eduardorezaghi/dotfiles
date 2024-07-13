@@ -87,27 +87,19 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Pyenv virtualenv command key
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if command -v pyenv &>/dev/null; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
-# Rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-. "$HOME/.cargo/env"
+
 
 # ASDF dependency manager
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+if command -v asdf &>/dev/null; then
+    source "$HOME/.asdf/asdf.sh"
+    source "$HOME/.asdf/completions/asdf.bash"
+fi
 
 PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;214m\]\u\[\e[0m\]@\[\e[38;5;36;1m\]\H\[\e[0m\] \[\e[38;5;166m\][\[\e[38;5;130;3m\]\w\[\e[0;38;5;166m\]]\[\e[0m\] ${PS1_CMD1}\n\$ '
-
-
-# pnpm
-export PNPM_HOME="/home/eduardo/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end

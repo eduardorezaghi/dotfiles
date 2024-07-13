@@ -17,8 +17,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 elif [[ "$(uname)" == "Linux" ]]; then
-    # SSH agent persistence with systemd
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+    (command -v keychain &>/dev/null) && eval $(keychain --eval --quiet id_ed25519 id_rsa) 2>/dev/null
 
     # if running bash and .bashrc exists, include it
     [[ -n "$BASH_VERSION" && -f "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
