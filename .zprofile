@@ -9,3 +9,7 @@
 
 # Set default editor
 export EDITOR="vim"
+
+
+# For OpenFortiVPN
+alias vpn="openfortivpn-webview --url 'https://vpn.skyone.solutions:10443/remote/saml/start?redirect=0' | sudo openfortivpn vpn.skyone.solutions:10443 -c config.template --cookie-on-stdin"
