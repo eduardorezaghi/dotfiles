@@ -4,7 +4,7 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # For WSL2, set the default browser to wslview (makes sure that the browser is opened in Windows).
-[[ $(uname -r) == *"Microsoft"* ]] && export BROWSER=wslview
+[[ $(uname -r) == *"microsoft"* ]] && export BROWSER=wslview
 
 export PAGER="nvimpager"
 
@@ -15,3 +15,7 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 
+# Set JAVA_HOME if java is installed
+if command -v java &> /dev/null; then
+    export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+fi

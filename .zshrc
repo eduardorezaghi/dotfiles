@@ -16,12 +16,6 @@ autoload -Uz compinit && compinit
 # AWS CLI.
 complete -C '/usr/local/bin/aws_completer' aws
 
-# Funtoo keychain.
-if [ "$(uname)" = "Linux" ]; then
-    # If keychain is installed, load the keys.
-    (command -v keychain &>/dev/null) && eval $(keychain --eval --quiet id_ed25519 id_rsa) 2>/dev/null
-fi
-
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
@@ -102,7 +96,7 @@ fi
 
 # Options
 setopt autocd              # Automatically change directory when typing a directory name
-setopt correct             # Suggest corrections for mistyped commands
+# setopt correct             # Suggest corrections for mistyped commands
 setopt extendedglob        # Enable extended globbing patterns
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
