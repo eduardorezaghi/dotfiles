@@ -102,4 +102,11 @@ if command -v asdf &>/dev/null; then
     source "$HOME/.asdf/completions/asdf.bash"
 fi
 
+# Use fish shell, if exists.
+if [ -t 1 ]; then
+  if command -v fish > /dev/null 2>&1; then
+    exec fish
+  fi
+fi
+
 PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;214m\]\u\[\e[0m\]@\[\e[38;5;36;1m\]\H\[\e[0m\] \[\e[38;5;166m\][\[\e[38;5;130;3m\]\w\[\e[0;38;5;166m\]]\[\e[0m\] ${PS1_CMD1}\n\$ '
