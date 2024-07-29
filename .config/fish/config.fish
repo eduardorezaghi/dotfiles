@@ -2,6 +2,8 @@
 set -gx PYENV_ROOT $HOME/.pyenv
 set -gx PATH $PYENV_ROOT/bin $PATH
 
+set -gx PATH $HOME/.local/bin $PATH
+
 # Disable the welcome message
 set -g fish_greeting ''
 
@@ -38,12 +40,3 @@ if status is-interactive
     end
 end
 
-function __fzf_history_search
-    set -l selected (history | fzf --height 40% --layout=reverse --border)
-    if test -n "$selected"
-        commandline -r "$selected"
-        commandline -f repaint
-    end
-end
-
-bind \cr '__fzf_history_search'
