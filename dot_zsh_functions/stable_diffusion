@@ -1,0 +1,11 @@
+start_stable_diffusion () {
+    cd ~/stable-diffusion-webui
+    bash webui.sh
+}
+
+run_stable_diffusion () {
+    start_stable_diffusion
+}
+
+# Run stable_diffusion
+run_stable_diffusion "$@"
