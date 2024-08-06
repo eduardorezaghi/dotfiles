@@ -25,7 +25,10 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+# Enable globstar only if the host is not MacOS
+if [[ $(uname) != "Darwin" ]]; then
+    shopt -s globstar
+fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -98,8 +101,12 @@ fi
 
 # ASDF dependency manager
 if command -v asdf &>/dev/null; then
-    source "$HOME/.asdf/asdf.sh"
-    source "$HOME/.asdf/completions/asdf.bash"
+    if [[ $(uname) != "Darwin" ]]; then
+        source "$HOME/.asdf/asdf.sh"
+        source "$HOME/.asdf/completions/asdf.bash"
+    else
+        source /opt/homebrew/opt/asdf/libexec/asdf.sh
+    fi
 fi
 
 # Use fish shell, if exists.
