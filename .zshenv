@@ -19,3 +19,4 @@ export HISTFILESIZE=10000
 if command -v java &> /dev/null; then
     export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 fi
+. "$HOME/.cargo/env"

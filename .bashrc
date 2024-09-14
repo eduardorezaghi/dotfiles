@@ -38,6 +38,14 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
@@ -112,8 +120,18 @@ fi
 # Use fish shell, if exists.
 if [ -t 1 ]; then
   if command -v fish > /dev/null 2>&1; then
-    exec fish
+    # exec fish
+    echo "Fish shell is available, but not used. Run 'fish' to start fish shell."
   fi
 fi
 
 PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\[\e[38;5;214m\]\u\[\e[0m\]@\[\e[38;5;36;1m\]\H\[\e[0m\] \[\e[38;5;166m\][\[\e[38;5;130;3m\]\w\[\e[0;38;5;166m\]]\[\e[0m\] ${PS1_CMD1}\n\$ '
+. "$HOME/.cargo/env"
+
+# pnpm
+export PNPM_HOME="/home/eduardo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
