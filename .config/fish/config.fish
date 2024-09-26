@@ -4,10 +4,28 @@ set -gx PATH $PYENV_ROOT/bin $PATH
 set -gx PATH $HOME/.local/bin $PATH
 set -gx PGGSSENCMODE "disable"
 set -Ux PAGER "less"
-set -Ux SSH_AUTH_SOCK $HOME/.ssh/wsl-ssh-agent.sock
+
 
 # Disable the welcome message
 set -g fish_greeting ''
+
+
+if test (uname) = "Linux"
+    # add user's private bin directories to PATH if they exist
+    if test -d "$HOME/bin"
+        set -x PATH "$HOME/bin" $PATH
+    end
+    if test -d "$HOME/.local/bin"
+        set -x PATH "$HOME/.local/bin" $PATH
+    end
+
+    # Use socat to create a socket for ssh-agent
+    if test -e "$HOME/.local/bin/wsl-ssh-agent-relay"
+        wsl-ssh-agent-relay start
+        set -x SSH_AUTH_SOCK "$HOME/.ssh/wsl-ssh-agent.sock"
+    end
+end
+
 
 if status is-interactive
     if command -v fzf > /dev/null
@@ -39,10 +57,7 @@ if status is-interactive
         set -gx PATH /opt/homebrew/bin $PATH
     end
 
-    # Use socat to create a socket for ssh-agent
-    if test -e ~/.local/bin/wsl-ssh-agent-relay
-        wsl-ssh-agent-relay start
-    end
+
 end
 
 status --is-interactive; and pyenv virtualenv-init - | source

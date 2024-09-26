@@ -27,3 +27,9 @@ elif [[ "$(uname)" == "Linux" ]]; then
     [[ -d "$HOME/.local/bin" ]] && PATH="$HOME/.local/bin:$PATH"
 fi
 . "$HOME/.cargo/env"
+
+# Use socat to create a socket for ssh-agent
+if [ test -e ~/.local/bin/wsl-ssh-agent-relay ]; then
+    wsl-ssh-agent-relay start
+    export SSH_AUTH_SOCK=$HOME/.ssh/wsl-ssh-agent.sock
+fi
